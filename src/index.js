@@ -1,14 +1,17 @@
-import { createServer } from '@graphql-yoga/node'
+import { createServer, createPubSub } from '@graphql-yoga/node'
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import typeDefs from './schema.graphql'
-import { Query, Mutation, Post, Comment, User } from './resolvers/index.js'
+import { Query, Mutation, Post, Comment, User, Subscription } from './resolvers/index.js'
 import db from './db'
+
+const pubsub = createPubSub()
 
 const executableSchema = makeExecutableSchema({
   typeDefs,
   resolvers: {
     Query,
     Mutation,
+    Subscription,
     Post,
     Comment,
     User
@@ -18,7 +21,8 @@ const executableSchema = makeExecutableSchema({
 const server = createServer({
     schema: executableSchema,
     context: {
-        db
+        db,
+        pubsub
     }
   },
 )
