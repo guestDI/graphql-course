@@ -3,14 +3,14 @@ const posts = [
         id: '1',
         title: 'Title1',
         body: 'test@test.com',
-        published: false,
+        published: true,
         author: '1'
     },
     {
         id: '2',
         title: 'Title2',
         body: 'test@test.com',
-        published: false,
+        published: true,
         author: '2'
     }
 ]

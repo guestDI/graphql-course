@@ -17,6 +17,11 @@ const typeDefs = `
         deleteComment(id: ID!): Comment!
     }
 
+    type Subscription {
+        comment(postId: ID!): CommentSubscriptionPayload!
+        post: PostSubscriptionPayload!
+    }
+
     input CreateUserInput {
         name: String!
         email: String!
@@ -71,6 +76,22 @@ const typeDefs = `
         text: String!
         author: User!
         post: Post!
+    }
+
+    enum MutationType {
+        CREATED
+        DELETED
+        UPDATED
+    }
+
+    type CommentSubscriptionPayload {
+        mutation: MutationType!
+        data: Comment!
+    }
+
+    type PostSubscriptionPayload {
+        mutation: MutationType!
+        data: Post!
     }
 `
 
